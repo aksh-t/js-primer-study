@@ -97,5 +97,57 @@ fn();
 // - 配列
 // - 正規表現
 
+// # オブジェクトリテラル
+const obj = {}; // 中身が空のオブジェクトを作成
+console.log(obj);
+
+const obj2 = {
+    key: "value"
+};
+console.log(obj2);
+
+const obj3 = {
+    "key": "value"
+};
+// ドット記法
+console.log(obj3.key); // => "value"
+// ブラケット記法
+console.log(obj3["key"]); // => "value"
+
+// プロパティ名は文字列の"123"
+const object = {
+    "123": "value"
+};
+// OK: ブラケット記法では、文字列として書くことができる
+console.log(object["123"]); // => "value"
+// NG: ドット記法では、数値からはじまる識別子は利用できない
+// object.123
 
 
+// # 配列リテラル
+const emptyArray = [];
+const array = [1, 2, 3];
+
+const array2 = ["index:0", "index:1", "index:2"];
+console.log(array2[0]);
+console.log(array2[1]);
+
+
+// # 正規表現リテラル
+const numberRegExp = /\d+/;
+console.log(numberRegExp.test(123));
+
+
+// # プリミティブ型とオブジェクト
+// ## ラッパーオブジェクト
+const str3 = new String("文字列");
+console.log(typeof str3); // => "object"
+console.log(str3.length); // => 3
+
+// プリミティブ型
+// プリミティブ型の文字列データ
+const str4 = "文字列";
+// プリミティブ型の文字列は"string"型のデータ
+console.log(typeof str4); // => "string"
+// プリミティブ型の文字列も`length`プロパティを参照できる
+console.log(str4.length); // => 3
