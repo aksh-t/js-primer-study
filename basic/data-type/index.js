@@ -8,7 +8,7 @@ console.log(typeof undefined);
 console.log(typeof null);
 console.log(typeof ["配列"]);
 console.log(typeof { "key": "value" });
-console.log(typeof function() {});
+console.log(typeof function () { });
 
 // "と"で囲んだ範囲が文字列リテラル
 const str = "こんにちは";
@@ -45,8 +45,7 @@ console.log(0o777);
 // ### 16進数
 console.log(0xFF);
 console.log(0xff);
-console.log(0x30A2)
-
+console.log(0x30A2);
 
 
 
