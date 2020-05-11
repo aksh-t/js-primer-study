@@ -24,24 +24,25 @@ true;
 false;
 
 // # 数値
-// ## 10進数
+// ## 整数リテラル
+// ### 10進数
 console.log(1);
 console.log(10);
 console.log(255);
 
-// ## ２進数
+// ### ２進数
 console.log(0b1111);
 console.log(0b10000000000);
 
-// ## 8進数
+// ### 8進数
 console.log(0o644);
 console.log(0o777);
 
-// ## これも8進数だけど、strict modeでは例外が発生する
+// ### これも8進数だけど、strict modeでは例外が発生する
 // console.log(0644);
 // console.log(0777);
 
-// ## 16進数
+// ### 16進数
 console.log(0xFF);
 console.log(0xff);
 console.log(0x30A2)
