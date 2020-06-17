@@ -148,3 +148,79 @@
     const array = [1, 2]
     print(array)
 }
+
+{
+    function fn() {
+        console.log("fnが呼び出されました")
+    }
+    const myFunc = fn
+    myFunc()
+}
+
+{
+    const factorial = function innerFact(n) {
+        if (n === 0) {
+            return 1
+        }
+        return n * innerFact(n - 1)
+    }
+    console.log(factorial(3))
+}
+
+{
+    const fnA = () => { }
+    const fnB = (x) => { }
+    const fnC = x => { }
+    const fnD = (x, y) => { }
+
+    const mulA = x => { return x * x }
+    const mulB = x => x * x
+}
+
+{
+    const array = [1, 2, 3]
+    const doubleArray = array.map(function (value) {
+        return value * 2
+    })
+    console.log(doubleArray)
+}
+
+{
+    const array = [1, 2, 3]
+    const doubleArray = array.map(value => value * 2)
+    console.log(doubleArray)
+}
+
+{
+    function fn(x) {
+        return `最初の関数　x: ${x}`
+    }
+
+    // テキストには同じ名前の関数はあと勝ちになると書いてあったが、
+    // 少なくともchromeではエラーになった
+    // function fn(x, y) {
+    //     return `最後の関数 x: ${x}, y: ${y}`
+    // }
+    console.log(fn(2, 10))
+}
+
+{
+    function 高階関数(コールバック関数) {
+        コールバック関数()
+    }
+}
+
+{
+    const array = [1, 2, 3]
+    const output = (value) => {
+        console.log(value)
+    }
+    array.forEach(output)
+}
+
+{
+    const array = [1, 2, 3]
+    array.forEach((value) => {
+        console.log(value)
+    })
+}
