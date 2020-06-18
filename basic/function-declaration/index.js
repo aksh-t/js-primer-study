@@ -224,3 +224,39 @@
         console.log(value)
     })
 }
+
+{
+    const obj = {
+        method1: function () {
+            // 
+        },
+        method2: () => {
+            // 
+        }
+    }
+}
+
+{
+    const obj = {}
+    obj.method = function () {
+        // 
+    }
+}
+
+{
+    const obj = {
+        method: function () {
+            return "this is method"
+        }
+    }
+    console.log(obj.method())
+}
+
+{
+    const obj = {
+        method() {
+            return "this is method"
+        }
+    }
+    console.log(obj.method())
+}
