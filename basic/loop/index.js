@@ -17,3 +17,10 @@
     //     i += 1;
     // }
 }
+
+{
+    const x = 1000
+    do {
+        console.log(x)
+    } while (x < 10)
+}
