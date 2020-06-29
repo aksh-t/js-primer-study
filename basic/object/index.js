@@ -50,3 +50,8 @@
     };
     console.log(obj);
 }
+
+{
+    const obj = new Object();
+    console.log(obj);
+}
