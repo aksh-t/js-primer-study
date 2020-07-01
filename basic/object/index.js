@@ -86,3 +86,24 @@
     const myLang = "ja";
     console.log(languages[myLang]);
 }
+
+{
+    const languages = {
+        ja: "日本語",
+        en: "英語"
+    };
+    const ja = languages.ja;
+    const en = languages.en;
+    console.log(ja);
+    console.log(en);
+}
+
+{
+    const languages = {
+        ja: "日本語",
+        en: "英語"
+    };
+    const { ja, en } = languages;
+    console.log(ja);
+    console.log(en);
+}
