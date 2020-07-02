@@ -107,3 +107,34 @@
     console.log(ja);
     console.log(en);
 }
+
+{
+    const obj = {};
+    obj.key = "value";
+    console.log(obj.key);
+}
+
+{
+    const key = "key-string";
+    const obj = {};
+    obj[key] = "value of key";
+    console.log(obj[key]);
+}
+
+{
+    const key = "key-string";
+    // Computed Property
+    const obj = {
+        [key]: "value"
+    };
+    console.log(obj[key]);
+}
+
+{
+    function changeProperty(obj) {
+        obj.key = "value";
+    }
+    const obj = {};
+    changeProperty(obj);
+    console.log(obj.key);
+}
