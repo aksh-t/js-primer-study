@@ -147,3 +147,19 @@
     delete obj.key1;
     console.log(obj);
 }
+
+{
+    const obj = { key: "value" };
+    obj.key = "Hi!";
+    console.log(obj.key);
+}
+
+{
+    const obj = { key: "value" };
+    // obj = {};
+}
+
+{
+    const object = Object.freeze({ key: "value" });
+    // object.key = "value";
+}
