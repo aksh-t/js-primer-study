@@ -163,3 +163,202 @@
     const object = Object.freeze({ key: "value" });
     // object.key = "value";
 }
+
+{
+    const obj = {};
+    console.log(obj.notFound);
+}
+
+{
+    const widget = {
+        window: {
+            title: "ウィジェットのタイトル"
+        }
+    };
+
+    console.log(widget.windw);
+    // console.log(widget.windw.title);
+}
+
+{
+    const obj = {
+        key: "value"
+    };
+    if (obj.key !== undefined) {
+        console.log("`key`プロパティの値は`undefined`ではない");
+    }
+}
+
+{
+    const obj = {
+        key: undefined
+    };
+    if (obj.key !== undefined) {
+        // この行は実行されません
+    }
+}
+
+{
+    const obj = { key: undefined };
+    if ("key" in obj) {
+        console.log("`key`プロパティは存在する");
+    }
+}
+
+{
+    const obj = { key: "value" };
+    if (obj.hasOwnProperty("key")) {
+        console.log("`object`は`key`プロパティを持っている");
+    }
+}
+
+{
+    const obj = { key: "value" };
+    console.log(obj.toString());
+    console.log(String(obj));
+}
+
+{
+    const customObject = {
+        toString() {
+            return "custom value";
+        }
+    };
+    console.log(String(customObject));
+}
+
+{
+    const obj = {};
+    const keyObject1 = { a: 1 };
+    const keyObject2 = { b: 2 };
+
+    obj[keyObject1] = "1";
+    obj[keyObject2] = "2";
+    console.log(obj);
+}
+
+{
+    const obj = {};
+    const symbolKey1 = Symbol("シンボル1");
+    const symbolKey2 = Symbol("シンボル2");
+    obj[symbolKey1] = "1";
+    obj[symbolKey2] = "2";
+    console.log(obj[symbolKey1]);
+    console.log(obj[symbolKey2]);
+}
+
+{
+    const obj = {
+        "one": 1,
+        "two": 2,
+        "three": 3
+    };
+
+    console.log(Object.keys(obj));
+    console.log(Object.values(obj));
+    console.log(Object.entries(obj));
+}
+
+{
+    const obj = {
+        "one": 1,
+        "two": 2,
+        "three": 3
+    };
+    const keys = Object.keys(obj);
+    keys.forEach(key => {
+        console.log(key);
+    });
+}
+
+{
+    const objectA = { a: "a" };
+    const objectB = { b: "b" };
+    const merged = Object.assign({}, objectA, objectB);
+    console.log(merged);
+}
+
+{
+    const objectA = { a: "a" };
+    const objectB = { b: "b" };
+    const merged = Object.assign(objectA, objectB);
+
+    console.log(merged);
+    console.log(objectA);
+    console.log(merged === objectA);
+}
+
+{
+    const objectA = { version: "a" };
+    const objectB = { version: "b" };
+    const merged = Object.assign({}, objectA, objectB);
+    console.log(merged);
+}
+
+{
+    const objectA = { a: "a" };
+    const objectB = { b: "b" };
+    const merged = {
+        ...objectA,
+        ...objectB
+    };
+    console.log(merged);
+}
+
+{
+    const objectA = { version: "a" };
+    const objectB = { version: "b" };
+    const merged = {
+        ...objectA,
+        ...objectB,
+        other: "other"
+    };
+    console.log(merged);
+}
+
+{
+    const shallowClone = (obj) => {
+        return Object.assign({}, obj);
+    };
+    const obj = { a: "a" };
+    const cloneObj = shallowClone(obj);
+    console.log(cloneObj);
+    console.log(obj === cloneObj);
+}
+
+{
+    const shallowClone = (obj) => {
+        return Object.assign({}, obj);
+    };
+    const obj = {
+        level: 1,
+        nest: {
+            level: 2
+        }
+    };
+    const cloneObj = shallowClone(obj);
+    console.log(cloneObj.nest === obj.nest);
+}
+
+{
+    const shalloClone = (obj) => {
+        return Object.assign({}, obj);
+    };
+    function deepClone(obj) {
+        const newObj = shalloClone(obj);
+
+        Object.keys(newObj)
+            .filter(k => typeof newObj[k] === "object")
+            .forEach(k => newObj[k] = deepClone(newObj[k]));
+        return newObj;
+    }
+
+    const obj = {
+        level: 1,
+        nest: {
+            level: 2
+        }
+    };
+    const cloneObj = deepClone(obj);
+    console.log(cloneObj.nest === obj.nest);
+}
