@@ -94,3 +94,37 @@
     console.log(denseArray.hasOwnProperty(1));
     console.log(sparseArray.hasOwnProperty(1));
 }
+
+{
+    const array = ["Java", "JavaScript", "Ruby"];
+    // === 厳密一致で探索する
+    const indexOfJS = array.indexOf("JavaScript");
+    console.log(indexOfJS);
+    console.log(array[indexOfJS]);
+    console.log(array.indexOf("JS"));
+}
+
+{
+    const obj = { key: "value" };
+    const array = ["A", "B", obj];
+    // === じゃないので -1
+    console.log(array.indexOf({ key: "value" }));
+    // オブジェクトリテラルは新しいオブジェクトを作るので === にならない
+    console.log(obj === { key: "value" });
+    // 同じオブジェクトは一致する
+    console.log(array.indexOf(obj));
+}
+
+{
+    const colors = [
+        { "color": "red" },
+        { "color": "green" },
+        { "color": "blue" }
+    ];
+    // テストするコールバック関数を渡す
+    const indexOfBlue = colors.findIndex((obj) => {
+        return obj.color === "blue";
+    });
+    console.log(indexOfBlue);
+    console.log(colors[indexOfBlue]);
+}
