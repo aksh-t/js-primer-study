@@ -155,3 +155,30 @@
     console.log(array.slice(4, 1));
 }
 
+{
+    const array = ["Java", "JavaScript", "Ruby"];
+    const indexOfJS = array.indexOf("JavaScript");
+    if (indexOfJS !== -1) {
+        console.log("配列にJavaScriptが含まれている");
+    }
+}
+
+{
+    // ES2016
+    const array = ["Java", "JavaScript", "Ruby"];
+    if (array.includes("JavaScript")) {
+        console.log("配列にJavaScriptが含まれている");
+    }
+}
+
+{
+    const colors = [
+        { "color": "red" },
+        { "color": "green" },
+        { "color": "blue" }
+    ];
+    const isIncludedBlueColor = colors.some((obj) => {
+        return obj.color === "blue";
+    });
+    console.log(isIncludedBlueColor);
+}
