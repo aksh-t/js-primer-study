@@ -146,3 +146,12 @@
     });
     console.log(whiteColor);
 }
+
+{
+    const array = ["A", "B", "C", "D", "E"];
+    console.log(array.slice(1, 4));
+    console.log(array.slice(1));
+    console.log(array.slice(-1));
+    console.log(array.slice(4, 1));
+}
+
