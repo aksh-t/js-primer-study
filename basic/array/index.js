@@ -182,3 +182,21 @@
     });
     console.log(isIncludedBlueColor);
 }
+
+{
+    const array = ["A", "B", "C"];
+    array.push("D");
+    console.log(array);
+    const poppedItem = array.pop();
+    console.log(poppedItem);
+    console.log(array);
+}
+
+{
+    const array = ["A", "B", "C"];
+    array.unshift("S");
+    console.log(array);
+    const shiftedItem = array.shift();
+    console.log(shiftedItem);
+    console.log(array);
+}
