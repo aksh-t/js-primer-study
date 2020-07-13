@@ -265,3 +265,49 @@
     array = [];
     console.log(array);
 }
+
+{
+    const myArray = ["A", "B", "C"];
+    const result = myArray.push("D");
+    console.log(result);
+    console.log(myArray);
+}
+
+{
+    const myArray = ["A", "B", "C"];
+    const newArray = myArray.concat("D");
+    console.log(newArray);
+    console.log(myArray);
+    console.log(myArray === newArray);
+}
+
+{
+    function removeAtIndex(array, index) {
+        array.splice(index, 1);
+        return array;
+    }
+    const array = ["A", "B", "C"];
+    const newArray = removeAtIndex(array, 1);
+    console.log(array);
+}
+
+{
+    const myArray = ["A", "B", "C"];
+    const copiedArray = myArray.slice();
+    myArray.push("D");
+    console.log(myArray);
+    console.log(copiedArray);
+    console.log(copiedArray === myArray);
+}
+
+{
+    function removeAtIndex(array, index) {
+        const copiedArray = array.slice();
+        copiedArray.splice(index, 1);
+        return copiedArray;
+    }
+    const array = ["A", "B", "C"];
+    const newArray = removeAtIndex(array, 1);
+    console.log(newArray);
+    console.log(array);
+}
