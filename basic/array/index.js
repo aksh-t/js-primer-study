@@ -212,3 +212,18 @@
     const newArray = array.concat("新しい要素");
     console.log(newArray);
 }
+
+{
+    // ES2015
+    const array = ["A", "B", "C"];
+    const newArray = ["X", "Y", "Z", ...array];
+    const newArrayConcat = ["X", "Y", "Z"].concat(array);
+    console.log(newArray);
+    console.log(newArrayConcat);
+}
+
+{
+    const array = ["A", "B", "C"];
+    const newArray = ["X", ...array, "Z"];
+    console.log(newArray);
+}
