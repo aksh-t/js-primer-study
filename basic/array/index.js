@@ -241,3 +241,27 @@
     const array = ["A", "B", "C"];
     console.log(array.flat());
 }
+
+{
+    const array = ["A", "B", "C"];
+    array.splice(1, 1);
+    console.log(array);
+    console.log(array.length);
+    console.log(array[1]);
+    // すべて削除
+    array.splice(0, array.length);
+    console.log(array.length);
+}
+
+{
+    const array = [1, 2, 3];
+    array.length = 0;
+    console.log(array);
+}
+
+{
+    let array = [1, 2, 3];
+    console.log(array.length);
+    array = [];
+    console.log(array);
+}
