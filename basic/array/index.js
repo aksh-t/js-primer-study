@@ -200,3 +200,15 @@
     console.log(shiftedItem);
     console.log(array);
 }
+
+{
+    const array = ["A", "B", "C"];
+    const newArray = array.concat(["D", "E"]);
+    console.log(newArray);
+}
+
+{
+    const array = ["A", "B", "C"];
+    const newArray = array.concat("新しい要素");
+    console.log(newArray);
+}
