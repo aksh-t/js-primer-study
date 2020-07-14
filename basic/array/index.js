@@ -311,3 +311,36 @@
     console.log(newArray);
     console.log(array);
 }
+
+{
+    const array = [1, 2, 3];
+    array.forEach((currentValue, index, array) => {
+        console.log(currentValue, index, array);
+    });
+}
+
+{
+    const array = [1, 2, 3];
+    const newArray = array.map((currentValue, index, array) => {
+        return currentValue * 10;
+    });
+    console.log(newArray);
+    console.log(array !== newArray);
+}
+
+{
+    const array = [1, 2, 3];
+    const newArray = array.filter((currentValue, index, array) => {
+        return currentValue % 2 === 1;
+    });
+    console.log(newArray);
+    console.log(array !== newArray);
+}
+
+{
+    const array = [1, 2, 3];
+    const totalValue = array.reduce((accumulator, currentValue, index, array) => {
+        return accumulator + currentValue;
+    }, 0);
+    console.log(totalValue);
+}
