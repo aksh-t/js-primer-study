@@ -344,3 +344,34 @@
     }, 0);
     console.log(totalValue);
 }
+
+{
+    function myFunc() {
+        // Array-likeオブジェクト
+        console.log(arguments[0]);
+        console.log(arguments[1]);
+        console.log(arguments[2]);
+        console.log(typeof arguments.forEach);
+    }
+    myFunc("a", "b", "c");
+}
+
+{
+    function myFunc() {
+        console.log(Array.isArray([1, 2, 3]));
+        console.log(Array.isArray(arguments));
+    }
+    myFunc("a", "b", "c");
+}
+
+{
+    function myFunc() {
+        // ES2015
+        const argumentsArray = Array.from(arguments);
+        console.log(Array.isArray(argumentsArray));
+        argumentsArray.forEach(arg => {
+            console.log(arg);
+        });
+    }
+    myFunc("a", "b", "c");
+}
