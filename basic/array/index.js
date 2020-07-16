@@ -375,3 +375,32 @@
     }
     myFunc("a", "b", "c");
 }
+
+{
+    const array = ["a"].concat("b").concat("c");
+    console.log(array);
+}
+
+{
+    const abArray = ["a"].concat("b");
+    console.log(abArray);
+    const abcArray = abArray.concat("c");
+    console.log(abcArray);
+}
+
+{
+    const ECMAScriptVersions = [
+        { name: "ECMAScript 1", year: 1997 },
+        { name: "ECMAScript 2", year: 1998 },
+        { name: "ECMAScript 3", year: 1999 },
+        { name: "ECMAScript 5", year: 2009 },
+        { name: "ECMAScript 5.1", year: 2011 },
+        { name: "ECMAScript 2015", year: 2015 },
+        { name: "ECMAScript 2016", year: 2016 },
+        { name: "ECMAScript 2017", year: 2017 }
+    ];
+    const versionsNames = ECMAScriptVersions
+        .filter(ECMAScript => ECMAScript.year <= 2000)
+        .map(ECMAScript => ECMAScript.name);
+    console.log(versionsNames);
+}
