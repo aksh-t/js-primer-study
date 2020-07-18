@@ -102,3 +102,16 @@
 {
     console.log("".length);
 }
+
+{
+    console.log("文字列" === "文字列");
+    console.log("JS" === "ES");
+    console.log("文字列" === "文字");
+}
+
+{
+    console.log("A".charCodeAt(0));
+    console.log("B".charCodeAt(0));
+    console.log("A" > "B");
+    console.log("ABC" > "ABD");
+}
