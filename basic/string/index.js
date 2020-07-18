@@ -33,3 +33,18 @@
 {
     console.log("¯\\_(ツ)_/¯");
 }
+
+{
+    const str = "a" + "b";
+    console.log(str);
+}
+
+{
+    const name = "JavaScript";
+    console.log("Hello " + name + "!");
+}
+
+{
+    const name = "JavaScript";
+    console.log(`Hello ${name}!`);
+}
