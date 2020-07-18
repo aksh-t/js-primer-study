@@ -17,6 +17,19 @@
 
 {
     // リテラルと同じ記号はエスケープすれば使える
-    const str = "This book is \"js-primer\""
-    console.log(str)
+    const str = "This book is \"js-primer\"";
+    console.log(str);
+}
+
+{
+    const multiline = "1行目\n2行目\n3行目";
+    console.log(multiline);
+}
+
+{
+    console.log("¯\_(ツ)_/¯");
+}
+
+{
+    console.log("¯\\_(ツ)_/¯");
 }
