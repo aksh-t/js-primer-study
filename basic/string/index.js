@@ -93,3 +93,12 @@
     const strings = str.split(/\s+/);
     console.log(strings);
 }
+
+{
+    // CodeUnitの個数を返す
+    console.log("文字列".length);
+}
+
+{
+    console.log("".length);
+}
