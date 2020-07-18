@@ -60,3 +60,20 @@
     const str = "文字列";
     console.log(str[42]);
 }
+
+{
+    const str = "アオイ";
+    console.log(str.charCodeAt(0).toString(16));
+    console.log(str.charCodeAt(1).toString(16));
+    console.log(str.charCodeAt(2).toString(16));
+}
+
+{
+    const str = String.fromCharCode(
+        0x30a2,
+        0x30aa,
+        0x30a4
+    );
+    console.log(str);
+}
+// JavaScriptの文字列の各要素はUTF-16のCode Unitで構成されている
