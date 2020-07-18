@@ -77,3 +77,19 @@
     console.log(str);
 }
 // JavaScriptの文字列の各要素はUTF-16のCode Unitで構成されている
+
+{
+    const strings = "赤・青・緑".split("・");
+    console.log(strings);
+}
+
+{
+    const str = "赤・青・緑".split("・").join("、");
+    console.log(str);
+}
+
+{
+    const str = "a     b    c      d";
+    const strings = str.split(/\s+/);
+    console.log(strings);
+}
