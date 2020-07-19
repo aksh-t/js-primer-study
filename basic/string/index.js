@@ -115,3 +115,28 @@
     console.log("A" > "B");
     console.log("ABC" > "ABD");
 }
+
+{
+    const str = "ABCDE";
+    console.log(str.slice(1));
+    console.log(str.slice(1, 5));
+    console.log(str.slice(-1));
+    console.log(str.slice(1, 4));
+    console.log(str.slice(4, 1));
+}
+
+{
+    const str = "ABCDE";
+    console.log(str.substring(1));
+    console.log(str.substring(1, 5));
+    console.log(str.substring(-1));
+    console.log(str.slice(1, 4));
+    console.log(str.slice(4, 1));
+}
+
+{
+    const url = "https://example.com?param=1";
+    const indexOfQuery = url.indexOf("?");
+    const queryString = url.slice(indexOfQuery);
+    console.log(queryString);
+}
