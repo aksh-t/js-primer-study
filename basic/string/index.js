@@ -140,3 +140,162 @@
     const queryString = url.slice(indexOfQuery);
     console.log(queryString);
 }
+
+{
+    const str = "にわにはにわにわとりがいる";
+    console.log(str.indexOf("にわ"));
+    console.log(str.lastIndexOf("にわ"));
+    console.log(str.indexOf("未知のキーワード"));
+}
+
+{
+    const str = "JavaScript";
+    const searchWord = "Script";
+    const index = str.indexOf(searchWord);
+    if (index !== -1) {
+        console.log(`${searchWord}が見つかりました`);
+    } else {
+        console.log(`${searchWord}は見つかりませんでした`);
+    }
+}
+
+{
+    // ES2015
+    const str = "にわにはにわにわとりがいる";
+    console.log(str.startsWith("にわ"));
+    console.log(str.startsWith("いる"));
+    console.log(str.endsWith("にわ"));
+    console.log(str.endsWith("いる"));
+    console.log(str.includes("にわ"));
+    console.log(str.includes("いる"));
+}
+
+{
+    const pattern = /a+/;
+}
+
+{
+    const pattern = new RegExp("a+");
+}
+
+{
+    // 正規表現リテラルはパース時点でパターンが評価される
+    function main() {
+        // const invalidPattern = /[/;;
+    }
+}
+
+{
+    // RegExpコンストラクタは実行時までパターンは評価されない
+    function main() {
+        const invalidPattern = new RegExp("[");
+    }
+    // main();
+}
+
+{
+    const pattern = /\s{3}/;
+}
+
+{
+    const spaceCount = 3;
+    const pattern = new RegExp(`\\s{${spaceCount}}`);
+}
+// 正規表現リテラルの方が記述が簡潔で、パフォーマンスも良い
+// 変数を使って動的にパターンを変えたいときは、RegExpコンストラクタを使う
+
+{
+    const str = "ABC123EFG";
+    const searchPattern = /\d{3}/;
+    console.log(str.search(searchPattern));
+}
+
+{
+    const str = "abc123def";
+    const searchPattern = /\d+/;
+    const index = str.search(searchPattern);
+    // str.slice(index, index + マッチした文字列の長さ)
+}
+
+{
+    const str = "ABC あいう DE えお";
+    const alphabetsPattern = /[a-zA-Z]+/;
+    const results = str.match(alphabetsPattern);
+    console.log(results.length);
+    console.log(results[0]);
+    console.log(results.index);
+    console.log(results.input);
+}
+
+{
+    const str = "ABC あいう DE えお";
+    const alphabetsPattern = /[a-zA-Z]+/g;
+    const resultWithG = str.match(alphabetsPattern);
+    console.log(resultWithG.length);
+    console.log(resultWithG[0]);
+    console.log(resultWithG[1]);
+    console.log(resultWithG.index);
+    console.log(resultWithG.input);
+}
+
+{
+    const str = "ABC あいう DE えお";
+    const alphabetsPattern = /[a-zA-Z]+/;
+    const results = alphabetsPattern.exec(str);
+    console.log(results.length);
+    console.log(results[0]);
+    console.log(results.index);
+    console.log(results.input);
+}
+
+{
+    const str = "ABC あいう DE えお";
+    const alphabetsPattern = /[a-zA-Z]+/g;
+    console.log(alphabetsPattern.lastIndex);
+    const result1 = alphabetsPattern.exec(str);
+    console.log(result1[0]);
+    console.log(alphabetsPattern.lastIndex);
+    const result2 = alphabetsPattern.exec(str);
+    console.log(result2[0]);
+    console.log(alphabetsPattern.lastIndex);
+    const result3 = alphabetsPattern.exec(str);
+    console.log(result3);
+    console.log(alphabetsPattern.lastIndex);
+}
+
+{
+    const str = "ABC あいう DE えお";
+    const alphabetsPattern = /[a-zA-Z]+/g;
+    let matches;
+    while (matches = alphabetsPattern.exec(str)) {
+        console.log(`match: ${matches[0]}, lastIndex: ${alphabetsPattern.lastIndex}`);
+    }
+}
+
+{
+    const pattern = /ECMAScript (\d+)/;
+    const [all, capture1] = "ECMAScript 6".match(pattern);
+    console.log(all);
+    console.log(capture1);
+}
+
+{
+    const str = "にわにはにわにわとりがいる";
+    console.log(/^にわ/.test(str));
+    console.log(/^いる/.test(str));
+    console.log(/にわ$/.test(str));
+    console.log(/いる$/.test(str));
+    console.log(/にわ/.test(str));
+    console.log(/いる/.test(str));
+}
+
+{
+    const str = "/正規表現のような文字列/";
+    const regExpLikePattern = /^\/.*\/$/;
+    console.log(regExpLikePattern.test(str));
+
+    const isRegExpLikeString = (str) => {
+        return str.startsWith("/") && str.endsWith("/");
+    };
+    console.log(isRegExpLikeString(str));
+}
