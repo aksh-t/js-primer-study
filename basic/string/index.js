@@ -299,3 +299,35 @@
     };
     console.log(isRegExpLikeString(str));
 }
+
+{
+    const str = "文字列";
+    // delete str[0];
+}
+
+{
+    const str = "文字列";
+    const newStr = str.replace("文字", "");
+    console.log(newStr);
+}
+
+{
+    const str = "にわにはにわにわとりがいる";
+    // 最初に一致したものだけ置換
+    console.log(str.replace("にわ", "niwa"));
+    // 最初に一致したものだけ置換
+    console.log(str.replace(/にわ/, "niwa"));
+    // 繰り返し置換
+    console.log(str.replace(/にわ/g, "niwa"));
+}
+
+{
+    function toDateJa(dateString) {
+        return dateString.replace(/(\d{4})-(\d{2})-(\d{2})/, (all, year, month, day) => {
+            return `${year}年${month}月${day}日`;
+        });
+    }
+
+    console.log(toDateJa("本日は晴天ナリ"));
+    console.log(toDateJa("今日は2017-03-17です"));
+}
