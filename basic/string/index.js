@@ -331,3 +331,81 @@
     console.log(toDateJa("本日は晴天ナリ"));
     console.log(toDateJa("今日は2017-03-17です"));
 }
+
+{
+    function getResource(baseURL, pathname) {
+        const url = baseURL + pathname;
+        console.log(url);
+    }
+    const baseURL = "http://example.com/resouces";
+    const pathname = "/example.js";
+    getResource(baseURL, pathname);
+}
+
+{
+    function getResource(baseURL, pathname) {
+        const url = baseURL + pathname;
+        console.log(url);
+    }
+    const baseURL = "http://example.com/resouces/";
+    const pathname = "/example.js";
+    getResource(baseURL, pathname);
+}
+
+{
+    function baseJoin(baseURL, pathname) {
+        const stripSlashBaseURL = baseURL.replace(/\/$/, "");
+        return stripSlashBaseURL + pathname;
+    }
+
+    function getResource(baseURL, pathname) {
+        const url = baseJoin(baseURL, pathname);
+        console.log(url);
+    }
+    const baseURL = "http://example.com/resouces/";
+    const pathname = "/example.js";
+    getResource(baseURL, pathname);
+}
+
+{
+    // ES2015 タグつきテンプレート関数
+    function tag(str) {
+        console.log(str);
+    }
+    tag(`template ${0} literal ${1}`);
+}
+
+{
+    function tag(strings, ...values) {
+        console.log(strings);
+        console.log(values);
+    }
+    tag`template ${0} literal ${1}`;
+}
+
+{
+    function stringRaw(strings, ...values) {
+        return strings.reduce((result, str, i) => {
+            console.log([result, values[i - 1], str]);
+            return result + values[i - 1] + str;
+        });
+    }
+    console.log(stringRaw`template ${0} literal ${1}`);
+}
+
+{
+    // ES2015 String.raw
+    console.log(String.raw`template ${0} literal ${1}`);
+}
+
+{
+    function escapeURL(strings, ...values) {
+        return strings.reduce((result, str, i) => {
+            return result + encodeURIComponent(values[i - 1]) + str;
+        });
+    }
+
+    const input = "A&B";
+    const escapedURL = escapeURL`https://example.com/search?q=${input}&sort=desc`;
+    console.log(escapedURL);
+}
