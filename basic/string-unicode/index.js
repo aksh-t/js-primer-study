@@ -66,3 +66,15 @@
 {
     console.log("🍎".length);
 }
+
+{
+    const [all, fish] = "𩸽のひらき".match(/(.)のひらき/);
+    console.log(all);
+    console.log(fish);
+}
+
+{
+    const [all, fish] = "𩸽のひらき".match(/(.)のひらき/u);
+    console.log(all);
+    console.log(fish);
+}
