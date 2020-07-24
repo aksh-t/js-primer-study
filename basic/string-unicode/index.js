@@ -90,3 +90,25 @@
     console.log(codePoints);
     console.log(codePoints.length);
 }
+
+{
+    function countOfCodePoints(str, codePoint) {
+        return Array.from(str).filter(item => {
+            return item === codePoint;
+        }).length;
+    }
+    console.log(countOfCodePoints("🍎🍇🍎🥕🍒", "🍎"));
+}
+
+{
+    function countOfCodePoints(str, codePoint) {
+        let count = 0;
+        for (const item of str) {
+            if (item === codePoint) {
+                count++;
+            }
+        }
+        return count;
+    };
+    console.log(countOfCodePoints("🍎🍇🍎🥕🍒", "🍎"));
+}
