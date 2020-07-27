@@ -94,3 +94,28 @@ console.log(Array);
     // 内側のスコープで外側のスコープと同じ名前の変数を定義することで、
     // 外側の変数が参照できなくなることを、変数の隠蔽(shadowing)と呼びます
 }
+
+{
+    // 写経の便宜上、このブロックスコープをグローバルスコープであるものとする
+    function doHeavyTask() {
+        // 計測したい処理
+    }
+    const startTime = Date.now();
+    doHeavyTask();
+    const endTime = Date.now();
+    console.log(`実行時間は${endTime - startTime}ミリ秒`);
+    // startTime と endTime が不必要にグローバルを汚染する
+}
+
+{
+    const measureTask = (taskFn) => {
+        const startTime = Date.now();
+        taskFn();
+        const endTime = Date.now();
+        console.log(`実行時間は${endTime - startTime}ミリ秒`);
+    };
+    function doHeavyTask() {
+        // 計測したい処理
+    }
+    measureTask(doHeavyTask);
+}
