@@ -55,3 +55,31 @@
     }
     // console.log(element);
 }
+
+{
+    {
+        const x = "x";
+        {
+            console.log(x);
+        }
+    }
+}
+
+{
+    {
+        // console.log(xyz)
+    }
+}
+
+// 内側から外側のスコープへと順番に定義を探す仕組み => スコープチェーン
+{
+    {
+        const x = "outer";
+        {
+            const x = "inner";
+            console.log(x);
+        }
+        console.log(x);
+    }
+}
+
