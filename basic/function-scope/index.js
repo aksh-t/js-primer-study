@@ -194,3 +194,30 @@ console.log(Array);
         return "Hello";
     };
 }
+
+{
+    // 即時実行関数(IIFE, Immediately-Invoked Function Expression)
+    (function () {
+        var foo = "foo";
+        console.log(foo);
+    })();
+    console.log(typeof foo === "undefined");
+}
+
+{
+    // ↑と等価だが、↑の方が無駄な関数定義が残らなくて良い
+    function fn() {
+        var foo = "foo";
+        console.log(foo);
+    }
+    console.log(typeof foo === "undefined");
+}
+
+{
+    // ES2015でletとconstが導入されたため、即時実行関数は置き換え可能になった
+    {
+        const foo = "foo";
+        console.log(foo);
+    }
+    console.log(typeof foo === "undefined");
+}
