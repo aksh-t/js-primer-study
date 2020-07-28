@@ -119,3 +119,59 @@ console.log(Array);
     }
     measureTask(doHeavyTask);
 }
+
+{
+    let let_x;
+    var var_x;
+
+    console.log(let_x);
+    console.log(var_x);
+
+    let_x = "letのx";
+    var_x = "varのx";
+}
+
+{
+    // console.log(x);
+    let x = "letのx";
+}
+
+{
+    console.log(x);
+    var x = "varのx";
+}
+
+{
+    // ↑が解釈されたコード
+    var x;
+    console.log(x);
+
+    x = "varのx";
+    console.log(x);
+}
+
+{
+    function fn() {
+        console.log(x);
+        {
+            var x = "varのx";
+        }
+        console.log(x);
+    }
+    fn();
+}
+
+{
+    // ↑を解釈したコード
+    function fn() {
+        var x;
+        console.log(x);
+        {
+            x = "varのx";
+        }
+        console.log(x);
+    }
+    fn();
+}
+
+// 変数の巻き上げ(hoisting)
