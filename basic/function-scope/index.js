@@ -343,3 +343,25 @@ console.log(Array);
     console.log(greaterThan5(5));
     console.log(greaterThan5(6));
 }
+
+{
+    function countUp() {
+        countUp.count = countUp.count + 1;
+        return countUp.count;
+    }
+    countUp.count = 0;
+    console.log(countUp());
+    console.log(countUp());
+}
+
+{
+    function countUp() {
+        countUp.count = countUp.count + 1;
+        return countUp.count;
+    }
+    countUp.count = 0;
+    console.log(countUp());
+    // 関数オブジェクトのプロパティを利用する形だと、直接変更できてしまう
+    countUp.count = 10;
+    console.log(countUp());
+}
