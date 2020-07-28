@@ -300,3 +300,21 @@ console.log(Array);
     console.log(array);
     // 変数arrayが[1, 2, 3]を参照しているので解放されない
 }
+
+
+// クロージャー(関数閉包)
+// 静的スコープと参照され続けている変数のデータが保持されるという2つ性質で成り立つ
+{
+    const createCounter = () => {
+        let count = 0;
+        return function increment() {
+            count = count + 1;
+            return count;
+        };
+    };
+    const countUp = createCounter();
+    const newCountUp = createCounter();
+    console.log(countUp === newCountUp);
+    console.log(countUp());
+    console.log(newCountUp());
+}
