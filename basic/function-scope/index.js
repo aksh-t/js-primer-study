@@ -175,3 +175,22 @@ console.log(Array);
 }
 
 // 変数の巻き上げ(hoisting)
+
+
+{
+    // 関数宣言が巻き上げられるため、呼び出しできる
+    hello();
+
+    function hello() {
+        return "Hello";
+    }
+}
+
+{
+    // 変数宣言が巻き上げられ、暗黙的に'undefined'となる
+    // hello();
+
+    var hello = function () {
+        return "Hello";
+    };
+}
