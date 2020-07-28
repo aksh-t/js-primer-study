@@ -275,3 +275,28 @@ console.log(Array);
     // printX(); // ここでは 10 が出力される
     // run(): //ここでは 20 が出力される
 }
+
+{
+    let x = "before text";
+    x = "after text";
+    // "before text"はどこからも参照されなくなり、GCの対象になる
+}
+
+{
+    function printX() {
+        const x = "X";
+        console.log(x);
+    }
+    printX();
+    // この時点で"X"の参照はなくなり、GCの対象になる
+}
+
+{
+    function createArray() {
+        const tempArray = [1, 2, 3];
+        return tempArray;
+    }
+    const array = createArray();
+    console.log(array);
+    // 変数arrayが[1, 2, 3]を参照しているので解放されない
+}
