@@ -120,3 +120,153 @@
     console.log(obj1.obj2.obj3.method() === obj1.obj2.obj3);
 }
 
+// thisが問題となるパターン
+// 問題: this を含むメソッドを変数に代入した場合
+{
+    "use strict";
+    const person = {
+        fullName: "Brendan Eich",
+        sayName: function () {
+            return this.name;
+        }
+    };
+
+    console.log(person.sayName());
+
+    const say = person.sayName;
+    // say();
+}
+
+// 対処法: call、apply、bindメソッド
+{
+    "use strict";
+    function say(message) {
+        return `${message} ${this.fullName}!`;
+    }
+    const person = {
+        fullName: "Brendan Eich"
+    };
+    console.log(say.call(person, "こんにちは"));
+    // say();
+}
+
+{
+    "use strict";
+    function say(message) {
+        return `${message} ${this.fullName}!`;
+    }
+    const person = {
+        fullName: "Brendan Eich"
+    };
+
+    console.log(say.apply(person, ["こんにちは"]));
+    // say();
+}
+
+{
+    function add(x, y) {
+        return x + y;
+    }
+    console.log(add.call(null, 1, 2));
+    console.log(add.apply(null, [1, 2]));
+}
+
+{
+    function say(message) {
+        return `${message} ${this.fullName}!`;
+    }
+    const person = {
+        fullName: "Brendan Eich"
+    };
+    const sayPerson = say.bind(person, "こんにちは");
+    console.log(sayPerson());
+}
+
+{
+    function say(message) {
+        return `${message} ${this.fullName}!`;
+    }
+    const person = {
+        fullName: "Brendan Eich"
+    };
+    const sayPerson = () => {
+        return say.call(person, "こんにちは");
+    };
+    console.log(sayPerson());
+}
+
+//  問題: コールバック関数とthis
+{
+    "use strict";
+    const Prefixer = {
+        prefix: "pre",
+        /**
+         * `strings`配列の各要素にprefixをつける
+         */
+        prefixArray(strings) {
+            return strings.map(function (str) {
+                return this.prefix + "_" + str;
+            });
+        }
+    };
+    // Prefixer.prefixArray(["a", "b", "c"]);
+}
+
+{
+    "use strict";
+    const Prefixer = {
+        prefix: "pre",
+        prefixArray(strings) {
+            const callback = function (str) {
+                return this.prefix + "_" + str;
+            };
+            return strings.map(callback);
+        }
+    };
+    // Prefixer.prefixArray(["a", "b", "c"]);
+}
+
+// 対処法: thisを一次変数へ代入する
+{
+    "use strict";
+    const Prefixer = {
+        prefix: "pre",
+        prefixArray(strings) {
+            const that = this;
+            return strings.map(function (str) {
+                return that.prefix + "_" + str;
+            });
+        }
+    };
+    const prefixedStrings = Prefixer.prefixArray(["a", "b", "c"]);
+    console.log(prefixedStrings);
+}
+
+{
+    "use strict";
+    const Prefixer = {
+        prefix: "pre",
+        prefixArray(strings) {
+            return strings.map(function (str) {
+                return this.prefix + "_" + str;
+            }, this);
+        }
+    };
+    const prefixedStrings = Prefixer.prefixArray(["a", "b", "c"]);
+    console.log(prefixedStrings);
+}
+
+// 対処法: Arrow Functionでコールバック関数を扱う
+{
+    "use strict";
+    const Prefixer = {
+        prefix: "pre",
+        prefixArray(strings) {
+            return strings.map((str) => {
+                return this.prefix + "_" + str;
+            });
+        }
+    };
+    const prefixedStrings = Prefixer.prefixArray(["a", "b", "c"]);
+    console.log(prefixedStrings);
+}
