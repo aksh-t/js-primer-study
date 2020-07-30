@@ -270,3 +270,101 @@
     const prefixedStrings = Prefixer.prefixArray(["a", "b", "c"]);
     console.log(prefixedStrings);
 }
+
+{
+    // const this = "thisは読み取り専用";
+}
+
+{
+    const fn = () => {
+        return this;
+    };
+    console.log(fn() === this);
+}
+
+{
+    "use strict";
+    function outer() {
+        return () => {
+            return this;
+        };
+    }
+    const innerArrowFunction = outer();
+    console.log(innerArrowFunction());
+}
+
+{
+    "use strict";
+    function outer() {
+        const that = this;
+        return () => {
+            return that;
+        };
+    }
+    const innerArrowFunction = outer();
+    console.log(innerArrowFunction());
+}
+
+// メソッドとコールバック関数とArrow Function
+{
+    const callCallback = (callback) => {
+        // 
+    };
+
+    const obj = {
+        method() {
+            callCallback(function () {
+                // 
+            });
+        }
+    };
+}
+
+{
+    const callCallback = (callback) => {
+        // 
+    };
+
+    const obj = {
+        method() {
+            callCallback(() => {
+                // 
+            });
+        }
+    };
+}
+
+{
+    const Prefixer = {
+        prefix: "pre",
+        prefixArray(strings) {
+            return strings.map((str) => {
+                return this.prefix + "-" + str;
+            });
+        }
+    };
+    const prefixedStrings = Prefixer.prefixArray(["a", "b", "c"]);
+    console.log(prefixedStrings);
+}
+
+// Arrow Functionはthisをbindできない
+{
+    const fn = () => {
+        return this;
+    };
+    console.log(fn());
+    console.log(fn.call({}));
+}
+
+{
+    const obj = {
+        method() {
+            const arrowFunction = () => {
+                return this;
+            };
+            return arrowFunction();
+        }
+    };
+    console.log(obj.method());
+    console.log(obj.method.call("THAT"));
+}
