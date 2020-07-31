@@ -80,3 +80,25 @@
     class Thing { }
     const thing = new Thing();
 }
+
+{
+    // ES2015 以前の関数によるクラスの実装
+    const Point = function PointConstructor(x, y) {
+        this.x = x;
+        this.y = y;
+    };
+
+    const point = new Point(3, 4);
+}
+
+{
+    function MyClassLike() {
+    }
+
+    MyClassLike();
+
+    class MyClass {
+    }
+
+    // MyClass();
+}
