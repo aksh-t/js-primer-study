@@ -75,3 +75,8 @@
     console.log(point);
     console.log(point instanceof Point);
 }
+
+{
+    class Thing { }
+    const thing = new Thing();
+}
