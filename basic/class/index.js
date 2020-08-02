@@ -134,3 +134,59 @@
 
     console.log(counterA.increment === counterB.increment);
 }
+
+{
+    class Counter {
+        constructor() {
+            this.count = 0;
+            this.increment = () => {
+                this.count++;
+            };
+        }
+    }
+    const counterA = new Counter();
+    const counterB = new Counter();
+    counterA.increment();
+    console.log(counterA.count);
+    console.log(counterB.count);
+}
+
+{
+    class Counter {
+        constructor() {
+            this.count = 0;
+            this.increment = () => {
+                this.count++;
+            };
+        }
+    }
+    const counterA = new Counter();
+    const counterB = new Counter();
+    console.log(counterA.increment !== counterB.increment);
+}
+
+{
+    "use strict";
+    class ArrowClass {
+        constructor() {
+            this.method = () => {
+                return this;
+            };
+        }
+    }
+    const instance = new ArrowClass();
+    const method = instance.method;
+    console.log(method());
+}
+
+{
+    "use strict";
+    class PrototypeClass {
+        method() {
+            return this;
+        }
+    }
+    const instance = new PrototypeClass;
+    const method = instance.method;
+    console.log(method());
+}
