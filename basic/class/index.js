@@ -252,3 +252,45 @@
     arrayLike.length = 5;
     console.log(arrayLike.items.join(", "));
 }
+
+{
+    class ArrayWrapper {
+        constructor(array = []) {
+            this.array = array;
+        }
+
+        static of(...items) {
+            return new ArrayWrapper(items);
+        }
+
+        get length() {
+            return this.array.length;
+        }
+    }
+
+    const arrayWrapperA = new ArrayWrapper([1, 2, 3]);
+    const arrayWrapperB = ArrayWrapper.of(1, 2, 3);
+
+    console.log(arrayWrapperA.length);
+    console.log(arrayWrapperB.length);
+}
+
+{
+    class ArrayWrapper {
+        constructor(array = []) {
+            this.array = array;
+        }
+
+        static of(...items) {
+            // staticメソッドのthisはインスタンスではなく、クラス自身を参照する
+            return new this(items);
+        }
+
+        get length() {
+            return this.array.length;
+        }
+    }
+
+    const arrayWrapper = ArrayWrapper.of(1, 2, 3);
+    console.log(arrayWrapper.length);
+}
