@@ -333,3 +333,62 @@
     console.log(typeof MyClass.prototype.method === "function");
     console.log(MyClass.prototype.constructor === MyClass);
 }
+
+{
+    class MyClass {
+        method() {
+            console.log("プロトタイプのメソッド");
+        }
+    }
+
+    const instance = new MyClass();
+    instance.method();
+}
+
+// インスタンス作成とプロトタイプチェーン
+{
+    class MyClass {
+        method() {
+            console.log("プロトタイプのメソッド");
+        }
+    }
+    const instance = new MyClass();
+    const MyClassPrototype = Object.getPrototypeOf(instance);
+    console.log(MyClassPrototype === MyClass.prototype);
+}
+
+// Note: [[Prototype]]内部プロパティを読み書きする
+// Object.setPrototypeOf(オブジェクト, プロトタイプオブジェクト) で書き換えたり、
+// __proto__ アクセッサプロパティでアクセスできるが、不要に扱うべきではない
+
+// プロパティの参照とプロトタイプチェーン
+{
+    class MyClass {
+        method() {
+            console.log("プロトタイプのメソッド");
+        }
+    }
+    const instance = new MyClass();
+    instance.method();
+    const Prototype = Object.getPrototypeOf(instance);
+    console.log(instance.method === Prototype.method);
+}
+
+{
+    // プロトタイプチェーンの動作の擬似的なコード
+    class MyClass {
+        method() {
+            console.log("プロトタイプのメソッド");
+        }
+    }
+    const instance = new MyClass();
+
+    if (instance.hasOwnProperty("method")) {
+        instance.method();
+    } else {
+        const prototypeObject = Object.getPrototypeOf(instance);
+        if (prototypeObject.hasOwnProperty("method")) {
+            prototypeObject.method.call(instance);
+        }
+    }
+}
