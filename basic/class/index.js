@@ -392,3 +392,136 @@
         }
     }
 }
+
+{
+    class Parent {
+
+    }
+    class Child extends Parent {
+
+    }
+    const instance = new Child();
+}
+
+{
+    class Parent {
+        constructor(...args) {
+            console.log("Parentコンストラクタの処理", ...args);
+        }
+    }
+
+    class Child extends Parent {
+        constructor(...args) {
+            super(...args);
+            console.log("Childコンストラクタの処理", ...args);
+        }
+    }
+    const child = new Child("引数1", "引数2");
+}
+
+{
+    class Parent { }
+    class Child extends Parent { }
+}
+
+{
+    class Parent { }
+    class Child extends Parent {
+        constructor(...args) {
+            super(...args);
+        }
+    }
+}
+
+{
+    class Parent {
+        constructor() {
+            this.name = "Parent";
+        }
+    }
+
+    class Child extends Parent {
+        constructor() {
+            super();
+            this.name = "Child";
+        }
+    }
+
+    const parent = new Parent();
+    console.log(parent.name);
+    const child = new Child();
+    console.log(child.name);
+}
+
+{
+    class Parent {
+        method() {
+            console.log("Parent#method");
+        }
+    }
+
+    class Child extends Parent {
+
+    }
+
+    const instance = new Child();
+    instance.method();
+
+    // class構文ではプロトタイプオブジェクトを参照する仕組みによって継承が行われている
+    // プロトタイプ継承
+}
+
+{
+    class Parent {
+        static hello() {
+            return "Hello";
+        }
+    }
+    class Child extends Parent { }
+    console.log(Child.hello());
+}
+
+{
+    class Parent {
+        method() {
+            console.log("Parent#method");
+        }
+    }
+    class Child extends Parent {
+        method() {
+            console.log("Child#method");
+            super.method();
+        }
+    }
+    const child = new Child();
+    child.method();
+}
+
+{
+    class Parent {
+        static method() {
+            console.log("Parent.method");
+        }
+    }
+    class Child extends Parent {
+        static method() {
+            console.log("Child.method");
+            super.method();
+        }
+    }
+    Child.method();
+}
+
+{
+    class Parent { }
+    class Child extends Parent { }
+
+    const parent = new Parent();
+    const child = new Child();
+
+    console.log(parent instanceof Parent);
+    console.log(parent instanceof Child);
+
+    console.log(child instanceof Parent);
+    console.log(child instanceof Child);
+}
