@@ -314,3 +314,22 @@
     delete conflict.method;
     conflict.method();
 }
+
+{
+    function fn() {
+    }
+    console.log(typeof fn.prototype === "object");
+
+    class MyClass {
+    }
+    console.log(typeof MyClass.prototype === "object");
+}
+
+{
+    class MyClass {
+        method() { }
+    }
+
+    console.log(typeof MyClass.prototype.method === "function");
+    console.log(MyClass.prototype.constructor === MyClass);
+}
