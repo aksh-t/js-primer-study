@@ -294,3 +294,23 @@
     const arrayWrapper = ArrayWrapper.of(1, 2, 3);
     console.log(arrayWrapper.length);
 }
+
+{
+    class ConflictClass {
+        constructor() {
+            this.method = () => {
+                console.log("インスタンスオブジェクトのメソッド");
+            };
+        }
+
+        method() {
+            console.log("プロトタイプのメソッド");
+        }
+    }
+
+    const conflict = new ConflictClass();
+    conflict.method();
+
+    delete conflict.method;
+    conflict.method();
+}
