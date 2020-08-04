@@ -110,4 +110,13 @@ try {
         console.log(error.name);
         console.log(error.message);
     }
-} 
+}
+
+try {
+    function fn() {
+        x++;
+    }
+    fn();
+} catch (e) {
+
+}
