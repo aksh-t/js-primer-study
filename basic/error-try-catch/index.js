@@ -34,3 +34,80 @@ try {
         console.log(error.message);
     }
 }
+
+{
+    function assertPositiveNumber(num) {
+        if (num < 0) {
+            throw new Error(`${num} is not positive.`);
+        }
+    }
+
+    try {
+        assertPositiveNumber(-1);
+    } catch (error) {
+        console.log(error instanceof Error);
+        console.log(error.message);
+    }
+}
+
+{
+    try {
+        // Errorオブジェクト以外もthrowできるが、スタックトレースが得られない
+        throw "例外が投げられました";
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// ビルトインエラー
+{
+    try {
+        console.log(x);
+    } catch (error) {
+        console.log(error instanceof ReferenceError);
+        console.log(error.name);
+        console.log(error.message);
+    }
+}
+
+{
+    // SyntaxErrorはパース時に発生するので、try-catchできない
+    // foo! bar!;
+}
+
+{
+    try {
+        eval("foo! bar!");
+    } catch (error) {
+        console.log(error instanceof SyntaxError);
+        console.log(error.name);
+        console.log(error.message);
+    }
+}
+
+{
+    try {
+        const fn = {};
+        fn();
+    } catch (error) {
+        console.log(error instanceof TypeError);
+        console.log(error.name);
+        console.log(error.message);
+    }
+}
+
+{
+    function reverseString(str) {
+        if (typeof str !== "string") {
+            throw new TypeError(`${str} is not a string`);
+        }
+    }
+
+    try {
+        reverseString(100);
+    } catch (error) {
+        console.log(error instanceof TypeError);
+        console.log(error.name);
+        console.log(error.message);
+    }
+} 
