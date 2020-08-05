@@ -59,3 +59,28 @@
     blockTime(1000);
     console.log("ブロックする処理が完了しました");
 }
+
+// 非同期処理と例外処理
+{
+    try {
+        setTimeout(() => {
+            // ↓catchされない
+            // throw new Error("非同期なエラー");
+        }, 10);
+    } catch (error) {
+        console.log("非同期エラーはキャッチされないため、この行は実行されません");
+    }
+    console.log("この行は実行されます");
+}
+
+{
+    setTimeout(() => {
+        try {
+            throw new Error("エラー");
+        } catch (error) {
+            console.log("エラーをキャッチできる");
+        }
+    }, 10);
+    console.log("この行は実行されます");
+    // このやり方だと非同期処理の外からは非同期処理の中で例外が発生したかがわからない
+}
