@@ -157,3 +157,369 @@ try {
         (error) => { console.log(error.message); }
     );
 }
+
+// [ES2015] Promise
+try {
+    // エラーファーストコールバックを受け取る非同期処理の例
+    asyncTask((error, result) => {
+        if (error) {
+            // 非同期処理が失敗したときの処理
+        } else {
+            // 非同期処理が成功したときの処理
+        }
+    });
+} catch (e) {
+}
+
+try {
+    // Promise
+    asyncPromiseTask().then(() => {
+        // 非同期処理が成功したときの処理
+    }).catch(() => {
+        // 非同期処理が失敗したときの処理
+    });
+} catch (e) {
+}
+
+// Promiseインスタンスの作成
+{
+    const executer = (resolve, reject) => {
+        // 非同期の処理が成功したときはresolveを呼ぶ
+        // 非同期の処理が失敗したときはrejectを呼ぶ
+    };
+    const promise = new Promise(executer);
+}
+
+{
+    const promise = new Promise((resolve, reject) => {
+        // 非同期の処理が成功したときはresolve()を呼ぶ
+        // 非同期の処理が失敗したときはreject()を呼ぶ
+    });
+    const onFulfilled = () => {
+        console.log("resolveされたときに呼ばれる");
+    };
+    const onRejected = () => {
+        console.log("rejectされたときに呼ばれる");
+    };
+    promise.then(onFulfilled, onRejected);
+}
+
+// Promise#thenとPromise#catch
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/success")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            });
+        }, 1000 * Math.random());
+    }
+
+    dummyFetch("/success/data").then(function onFulfilled(response) {
+        console.log(response);
+    }, function onRejected(error) {
+        // この行は実行されません
+    });
+    dummyFetch("/failure/data").then(function onFulfilled(response) {
+        // この行は実行されません
+    }, function onRejected(error) {
+        console.log(error);
+    });
+}
+
+{
+    function delay(timeoutMs) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                setTimeout(() => {
+                    resolve();
+                }, timeoutMs);
+            });
+        });
+    }
+    delay(10).then(() => {
+        console.log("10ミリ秒後に呼ばれる");
+    });
+}
+
+{
+    function errorPromise(message) {
+        return new Promise((resolve, reject) => {
+            reject(new Error(message));
+        });
+    }
+    // 非推奨
+    errorPromise("thenでエラーハンドリング").then(undefined, (error) => {
+        console.log(error.message);
+    });
+
+    // 推奨
+    errorPromise("catchでエラーハンドリング").catch(error => {
+        console.log(error.message);
+    });
+}
+
+// Promiseと例外
+{
+    function throwPromise() {
+        return new Promise((resolve, reject) => {
+            throw new Error("例外が発生");
+        });
+    }
+
+    throwPromise().catch(error => {
+        console.log(error.message);
+    });
+}
+
+// Promiseの状態
+// 3つの状態
+// Fulfilled <- Settled(不変)
+// Rejected <- Settled(不変)
+// Pending
+{
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+            reject(new Error("エラー"));
+        }, 16);
+    });
+    promise.then(() => {
+        console.log("Fulfilledとなった");
+    }, (error) => {
+        // この行は呼び出されない
+    });
+}
+
+{
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+            resolve();
+        }, 16);
+    });
+    promise.then(() => {
+        console.log("最初のresolve時に一度だけ呼ばれる");
+    }, (error) => {
+        // この行は呼び出されない
+    });
+}
+
+// Promise.resolve
+// テストでよく使う
+{
+    // 糖衣構文
+    const fulfilledPromise = Promise.resolve();
+}
+
+{
+    const fulFilledPromise = new Promise((resolve) => {
+        resolve();
+    });
+}
+
+{
+    const fulFilledPromise = Promise.resolve(42);
+    fulFilledPromise.then(value => {
+        console.log(value);
+    });
+}
+
+{
+    const promise = Promise.resolve();
+    promise.then(() => {
+        console.log("2. コールバック関数が実行されました");
+    });
+    console.log("1. 同期的な処理が実行されました");
+}
+
+{
+    const promise = new Promise((resolve) => {
+        console.log("1. resolveします");
+        resolve();
+    });
+    promise.then(() => {
+        console.log("3. コールバック関数が実行されました");
+    });
+    console.log("2. 同期的な処理が行われました");
+}
+
+// Promise.reject
+// テストでよく使う & PromiseチェーンにおけるPromiseの状態操作
+{
+    const rejectedPromise = Promise.reject(new Error("エラー"));
+}
+
+{
+    const rejectedPromise = new Promise((resolve, reject) => {
+        reject(new Error("エラー"));
+    });
+}
+
+{
+    Promise.reject(new Error("エラー")).catch(() => {
+        console.log("2. コールバック関数が実行されました");
+    });
+    console.log("1. 同期的な処理が実行されました");
+}
+
+// Promiseチェーン
+{
+    Promise.resolve()
+        .then(() => {
+            console.log(1);
+        })
+        .then(() => {
+            console.log(2);
+        });
+}
+
+{
+    const firstPromise = Promise.resolve();
+    const secondPromise = firstPromise.then(() => {
+        console.log(1);
+    });
+    const thirdPromise = secondPromise.then(() => {
+        console.log(2);
+    });
+    console.log(firstPromise === secondPromise);
+    console.log(secondPromise === thirdPromise);
+}
+
+{
+    function asyncTask() {
+        return Math.random() > 0.5
+            ? Promise.resolve("成功")
+            : Promise.reject(new Error("失敗"));
+    }
+
+    asyncTask()
+        .then(function onFulfilled(value) {
+            console.log(value);
+        })
+        .catch(function onRejected(error) {
+            console.log(error.message);
+        });
+}
+
+{
+    const rejectedPromise = Promise.reject(new Error("失敗"));
+    rejectedPromise.then(() => {
+        // このthenのコールバック関数は呼び出されません
+    }).then(() => {
+        // このthenのコールバック関数は呼び出されません
+    }).catch(error => {
+        console.log(error.message);
+    });
+}
+
+{
+    Promise.resolve().then(() => {
+        throw new Error("例外");
+    }).then(() => {
+        // このthenのコールバック関数は呼び出されません
+    }).catch(error => {
+        console.log(error.message);
+    });
+}
+
+{
+    Promise.reject(new Error("エラー")).catch(error => {
+        console.log(error);
+    }).then(() => {
+        console.log("thenのコールバック関数が呼び出される");
+    });
+}
+
+// Promiseチェーンで値を返す
+{
+    Promise.resolve(1).then((value) => {
+        console.log(value);
+        return value * 2;
+    }).then(value => {
+        console.log(value);
+        return value * 2;
+    }).then(value => {
+        console.log(value);
+    }).then(value => {
+        console.log(value);
+    });
+}
+
+{
+    Promise.reject(new Error("失敗")).catch(error => {
+        return 1;
+    }).then(value => {
+        console.log(value);
+        return value * 2;
+    }).then(value => {
+        console.log(value);
+    });
+}
+
+// コールバック関数でPromiseインスタンスを返す
+{
+    Promise.resolve().then(function onFulfilledA() {
+        return Promise.reject(new Error("失敗"));
+    }).then(function onFulfilledB() {
+        console.log("onFulfilledBは呼び出されません");
+    }).catch(function onRejected(error) {
+        console.log(error.message);
+    }).then(function onFulfilledC() {
+        console.log("onFulFilledCは呼び出されます");
+    });
+}
+
+{
+    function main() {
+        return Promise.reject(new Error("エラー"));
+    }
+
+    main().catch(error => {
+        console.log(error);
+        return Promise.reject(error);
+    }).then(() => {
+        // 前のcatchでRejectedなPromiseが返されたため、この行は実行されません
+    }).catch(error => {
+        console.log("メインの処理が失敗した");
+    });
+}
+
+// [ES2018] Promiseチェーンの最後に処理を書く
+{
+    const promise = Math.random() < 0.5 ? Promise.resolve() : Promise.reject();
+    promise.then(() => {
+        console.log("Promise#then");
+    }).catch((error) => {
+        console.log("Promise#catch");
+    }).finally(() => {
+        console.log("Promise#finally");
+    });
+}
+
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.randome());
+        });
+    }
+
+    let isLoading = true;
+    dummyFetch("/resource/A").then(response => {
+        console.log(response);
+    }).catch(error => {
+        console.error(error);
+    }).finally(() => {
+        isLoading = false;
+        console.log("Promise#finally");
+    });
+}
