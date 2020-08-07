@@ -523,3 +523,145 @@ try {
         console.log("Promise#finally");
     });
 }
+
+// Promiseチェーンで逐次処理
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ bode: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            });
+        }, 1000 * Math.random());
+    }
+
+    const result = [];
+    dummyFetch("/resource/A").then(response => {
+        result.push(response.body);
+        return dummyFetch("/resource/B");
+    }).then(response => {
+        result.push(response.body);
+    }).then(() => {
+        console.log(results);
+    });
+}
+
+// Promise.allで複数のPromiseをまとめる
+{
+    function delay(timeoutMs) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(timeoutMs);
+            }, timeoutMs);
+        });
+    }
+    const promise1 = delay(1);
+    const promise2 = delay(2);
+    const promise3 = delay(3);
+
+    Promise.all([promise1, promise2, promise3]).then(function (values) {
+        console.log(values);
+    });
+}
+
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    const fetchedPromise = Promise.all([
+        dummyFetch("/resource/A"),
+        dummyFetch("/resource/B")
+    ]);
+    fetchedPromise.then(([responseA, responseB]) => {
+        console.log(responseA.body);
+        console.log(responseB.body);
+    });
+}
+
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    const fetchedPromise = Promise.all([
+        dummyFetch("resource/A"),
+        dummyFetch("/not_found/B")
+    ]);
+    fetchedPromise.then(([responseA, responseB]) => {
+        // この行は実行されません
+    }).catch(error => {
+        console.error(error);
+    });
+}
+
+// Promise.race
+{
+    function delay(timeoutMs) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(timeoutMs);
+            }, timeoutMs);
+        });
+    }
+
+    const racePromise = Promise.race([
+        delay(1),
+        delay(32),
+        delay(64),
+        delay(128)
+    ]);
+    racePromise.then(value => {
+        console.log(value);
+    });
+}
+
+{
+    function timeout(timeoutMs) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(new Error(`Timeout: ${timeoutMs}ミリ秒経過`));
+            }, timeoutMs);
+        });
+    }
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    Promise.race([
+        dummyFetch("/resource/data"),
+        timeout(500)
+    ]).then(response => {
+        console.log(response.body);
+    }).catch(error => {
+        console.log(error.message);
+    });
+
+}
