@@ -819,3 +819,99 @@ try {
         console.log(results);
     });
 }
+
+// Async Functionと組み合わせ
+// Async Functionと反復処理
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    async function fetchResources(resources) {
+        const results = [];
+        for (let i = 0; i < resources.length; i++) {
+            const resource = resources[i];
+            const response = await dummyFetch(resource);
+            results.push(response.body);
+        }
+        return results;
+    }
+    const resources = [
+        "/resource/A",
+        "/resource/B"
+    ];
+    fetchResources(resources).then((results) => {
+        console.log(results);
+    });
+}
+
+// Promise APIとAsync Functionを組み合わせる
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+    async function fetchAllResources(resources) {
+        const promises = resources.map(function (resource) {
+            return dummyFetch(resource);
+        });
+        const responses = await Promise.all(promises);
+        return responses.map((response) => {
+            return response.body;
+        });
+    }
+    const resources = [
+        "/resource/A",
+        "/resource/B"
+    ];
+    fetchAllResources(resources).then((results) => {
+        console.log(results);
+    });
+}
+
+// await式はAsync Functionの中でのみ利用可能
+{
+    function main() {
+        // await Promise.resolve();
+    }
+}
+
+{
+    async function asyncMain() {
+        await new Promise((resolve) => {
+            setTimeout(resolve, 16);
+        });
+    }
+    console.log("1. asyncMain関数を呼び出します");
+    asyncMain().then(() => {
+        console.log("3. asyncMain関数が完了しました");
+    });
+    console.log("2. asyncMain関数外では、次の行が同期的に呼び出される");
+}
+
+{
+    async function fetchResources(resources) {
+        const results = [];
+        resources.forEatch(function (resources) {
+            const resource = resources[i];
+            const response = await dummyFetch(resource);
+            results.push(response.body);
+        });
+        return results;
+    }
+}
