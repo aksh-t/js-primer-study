@@ -665,3 +665,14 @@ try {
     });
 
 }
+
+// [ES2017] Async Function
+{
+    async function doAsync() {
+        return "値";
+    }
+
+    doAsync().then(value => {
+        console.log(value);
+    });
+}
