@@ -676,3 +676,15 @@ try {
         console.log(value);
     });
 }
+
+// Async Functionの定義
+{
+    // 関数宣言
+    async function fn1() { }
+    // 関数式
+    const fn2 = async function () { };
+    // Arrow Function
+    const fn3 = async () => { };
+    // メソッドの短縮記法
+    const obj = { async MSInputMethodContext() { } };
+}
