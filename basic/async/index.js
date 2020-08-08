@@ -712,3 +712,110 @@ try {
         console.log(error.message);
     });
 }
+
+// await式
+{
+    async function doAsync() {
+        // 
+    }
+    async function asyncMain() {
+        await doAsync();
+        console.log("この行は非同期処理が完了後に実行される");
+    }
+}
+
+{
+    async function asyncMain() {
+        const value = await Promise.resolve(42);
+        console.log(value);
+    }
+    asyncMain();
+}
+
+{
+    function asyncMain() {
+        return Promise.resolve(42).then(value => {
+            console.log(value);
+        });
+    }
+    asyncMain();
+}
+
+{
+    async function asyncMain() {
+        const value = await Promise.reject(new Error("エラーメッセージ"));
+    }
+    asyncMain().catch(error => {
+        console.log(error.message);
+    });
+}
+
+{
+    async function asyncMain() {
+        try {
+            const value = await Promise.reject(new Error("エラーメッセージ"));
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    asyncMain().catch(error => {
+        // 
+    });
+}
+
+// Promiseチェーンをawait式で表現する
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    function fetchAB() {
+        const results = [];
+        return dummyFetch("/resource/A").then(response => {
+            results.push(response.body);
+            return dummyFetch("/resource/B");
+        }).then(response => {
+            results.push(response.body);
+            return results;
+        });
+    }
+
+    fetchAB().then((results) => {
+        console.log(results);
+    });
+}
+
+{
+    function dummyFetch(path) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (path.startsWith("/resource")) {
+                    resolve({ body: `Response body of ${path}` });
+                } else {
+                    reject(new Error("NOT FOUND"));
+                }
+            }, 1000 * Math.random());
+        });
+    }
+
+    async function fetchAB() {
+        const results = [];
+        const responseA = await dummyFetch("/resource/A");
+        results.push(responseA.body);
+        const responseB = await dummyFetch("/resource/B");
+        results.push(responseB);
+        return results;
+    }
+
+    fetchAB().then((results) => {
+        console.log(results);
+    });
+}
