@@ -179,3 +179,70 @@
     console.log(map.has(NaN));
     console.log(map.get(NaN));
 }
+
+{
+    const set = new Set();
+    console.log(set.size);
+}
+
+{
+    const set = new Set(["value1", "value2", "value2"]);
+    console.log(set.size);
+}
+
+{
+    const set = new Set();
+
+    set.add("a");
+    console.log(set.size);
+
+    set.add("a");
+    console.log(set.size);
+
+    console.log(set.has("a"));
+    console.log(set.has("b"));
+}
+
+{
+    const set = new Set();
+    set.add("a");
+    set.add("b");
+    console.log(set.size);
+    set.delete("a");
+    console.log(set.size);
+    set.clear();
+    console.log(set.size);
+}
+
+{
+    const set = new Set(["a", "b"]);
+    const results = [];
+    set.forEach((value) => {
+        results.push(value);
+    });
+    console.log(results);
+}
+
+{
+    const set = new Set(["a", "b"]);
+
+    const keysResults = [];
+    for (const value of set.keys()) {
+        keysResults.push(value);
+    }
+    console.log(keysResults);
+    const entryResults = [];
+    for (const entry of set.entries()) {
+        entryResults.push(entry);
+    }
+    console.log(entryResults);
+}
+
+{
+    const set = new Set(["a", "b"]);
+    const results = [];
+    for (const value of set) {
+        results.push(value);
+    }
+    console.log(results);
+}
