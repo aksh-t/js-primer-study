@@ -52,3 +52,24 @@
     const obj = { id: 1, name: "js-primer" };
     console.log(JSON.stringify(obj, null, "\t"));
 }
+
+{
+    console.log(JSON.stringify({ x: function () { } }));
+    console.log(JSON.stringify({ x: Symbol("") }));
+    console.log(JSON.stringify({ x: undefined }));
+    console.log(JSON.stringify({ x: [10, function () { }] }));
+    JSON.stringify({ [Symbol("foo")]: "foo" });
+    console.log(JSON.stringify({ x: /foo/ }));
+    const map = new Map();
+    console.log(JSON.stringify({ x: map }));
+}
+
+{
+    const obj = { foo: "foo" };
+    obj.self = obj;
+    try {
+        JSON.stringify(obj);
+    } catch (error) {
+        console.error(error);
+    }
+}
