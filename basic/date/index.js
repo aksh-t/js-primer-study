@@ -53,3 +53,9 @@
     const timezoneOffsetInHours = now.getTimezoneOffset() / 60;
     console.log(`Hours in UTC: ${now.getHours() + timezoneOffsetInHours}`);
 }
+
+{
+    const now = moment();
+    const future = now.add(10, "minutes")
+    console.log(future.format("YYYY/MM/DD"))
+}
