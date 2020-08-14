@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Example</title>
-  <script src="./index.js"></script>
+  <script type="module" src="./my-module.js"></script>
+  <script type="module">
+    import { foo } from "./my-module.js";
+  </script>
 </head>
 
 <body></body>
