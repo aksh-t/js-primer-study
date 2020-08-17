@@ -1,6 +1,7 @@
 async function main() {
     try {
-        const userInfo = await fetchUserInfo("js-primer-example");
+        const userId = getUserId();
+        const userInfo = await fetchUserInfo(userId);
         const view = createView(userInfo);
         displayView(view);
     } catch (error) {
@@ -22,21 +23,25 @@ function fetchUserInfo(userId) {
         });
 }
 
-function fetchUserInfoUsingXHR(userId) {
-    const request = new XMLHttpRequest();
-    request.open("GET", `https://api.github.com/users/${encodeURIComponent(userId)}`);
-    request.addEventListener("load", () => {
-        if (request.status >= 200 && request.status < 300) {
-            const userInfo = JSON.parse(request.responseText);
-            console.log(userInfo);
-        } else {
-            console.error("エラーレスポンス", request.statusText);
-        }
-    });
-    request.addEventListener("error", () => {
-        console.error("ネットワークエラー");
-    });
-    request.send();
+// function fetchUserInfoUsingXHR(userId) {
+//     const request = new XMLHttpRequest();
+//     request.open("GET", `https://api.github.com/users/${encodeURIComponent(userId)}`);
+//     request.addEventListener("load", () => {
+//         if (request.status >= 200 && request.status < 300) {
+//             const userInfo = JSON.parse(request.responseText);
+//             console.log(userInfo);
+//         } else {
+//             console.error("エラーレスポンス", request.statusText);
+//         }
+//     });
+//     request.addEventListener("error", () => {
+//         console.error("ネットワークエラー");
+//     });
+//     request.send();
+// }
+
+function getUserId() {
+    return document.getElementById("userId").value;
 }
 
 function escapeSpecialChars(str) {
