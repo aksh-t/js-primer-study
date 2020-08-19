@@ -11,6 +11,6 @@ fs.readFile(filePath, { encoding: "utf8" }, (err, file) => {
         process.exit(1);
         return;
     }
-    const html = marked(file);
+    const html = marked(file, { gfm: false });
     console.log(html);
 });
