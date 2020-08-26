@@ -20,27 +20,30 @@ export class App {
         this.todoListModel.deleteTodo({ id });
     }
 
-    mount() {
-        const formElement = document.querySelector("#js-form");
-        const inputElement = document.querySelector("#js-form-input");
+    handleChange() {
         const containerElement = document.querySelector("#js-todo-list");
         const todoItemCountElement = document.querySelector("#js-todo-count");
 
-        this.todoListModel.onChange(() => {
-            const todoItems = this.todoListModel.getTodoItems();
-            const todoListView = new TodoListView();
+        const todoItems = this.todoListModel.getTodoItems();
+        const todoListView = new TodoListView();
 
-            const todoListElement = todoListView.createElement(todoItems, {
-                onUpdateTodo: ({ id, completed }) => {
-                    this.handleUpdate({ id, completed });
-                },
-                onDeleteTodo: ({ id }) => {
-                    this.handleDelete({ id });
-                }
-            });
-            render(todoListElement, containerElement);
-            todoItemCountElement.textContent = `Todoアイテム数: ${this.todoListModel.getTotalCount()}`;
+        const todoListElement = todoListView.createElement(todoItems, {
+            onUpdateTodo: ({ id, completed }) => {
+                this.handleUpdate({ id, completed });
+            },
+            onDeleteTodo: ({ id }) => {
+                this.handleDelete({ id });
+            }
         });
+        render(todoListElement, containerElement);
+        todoItemCountElement.textContent = `Todoアイテム数: ${this.todoListModel.getTotalCount()}`;
+    }
+
+    mount() {
+        const formElement = document.querySelector("#js-form");
+        const inputElement = document.querySelector("#js-form-input");
+
+        this.todoListModel.onChange(this.handleChange);
         formElement.addEventListener("submit", (event) => {
             event.preventDefault();
 
@@ -54,8 +57,6 @@ export class App {
     }
 
     unmount() {
-        // TODO: ここでtodoListModelのリスナー削除をする
-        // ただし、リスナー関数をうまく渡せないので、一旦コメントアウト
-        // this.todoListModel.offChange(xxx)
+        this.todoListModel.offChange(this.handleChange);
     }
 }
