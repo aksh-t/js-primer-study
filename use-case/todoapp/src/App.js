@@ -44,6 +44,10 @@ export class App {
         formElement.addEventListener("submit", (event) => {
             event.preventDefault();
 
+            if (inputElement.value === "") {
+                return;
+            }
+
             this.handleAdd(inputElement.value);
             inputElement.value = "";
         });
