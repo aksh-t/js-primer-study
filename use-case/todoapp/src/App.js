@@ -54,6 +54,8 @@ export class App {
     }
 
     unmount() {
-        console.log("unmount");
+        // TODO: ここでtodoListModelのリスナー削除をする
+        // ただし、リスナー関数をうまく渡せないので、一旦コメントアウト
+        // this.todoListModel.offChange(xxx)
     }
 }
