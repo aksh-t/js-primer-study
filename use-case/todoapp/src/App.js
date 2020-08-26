@@ -6,6 +6,9 @@ import { render } from "./view/html-util.js";
 export class App {
     constructor() {
         this.todoListModel = new TodoListModel();
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleAdd(title) {
