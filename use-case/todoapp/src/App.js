@@ -39,24 +39,29 @@ export class App {
         todoItemCountElement.textContent = `Todoアイテム数: ${this.todoListModel.getTotalCount()}`;
     }
 
-    mount() {
-        const formElement = document.querySelector("#js-form");
+    handleSubmit(event) {
         const inputElement = document.querySelector("#js-form-input");
 
+        event.preventDefault();
+
+        if (inputElement.value === "") {
+            return;
+        }
+
+        this.handleAdd(inputElement.value);
+        inputElement.value = "";
+    }
+
+    mount() {
+        const formElement = document.querySelector("#js-form");
+
         this.todoListModel.onChange(this.handleChange);
-        formElement.addEventListener("submit", (event) => {
-            event.preventDefault();
-
-            if (inputElement.value === "") {
-                return;
-            }
-
-            this.handleAdd(inputElement.value);
-            inputElement.value = "";
-        });
+        formElement.addEventListener("submit", this.handleSubmit);
     }
 
     unmount() {
+        const formElement = document.querySelector("#js-form");
         this.todoListModel.offChange(this.handleChange);
+        formElement.removeEventListener("submit", this.handleSubmit);
     }
 }
