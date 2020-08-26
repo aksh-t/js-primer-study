@@ -52,4 +52,8 @@ export class App {
             inputElement.value = "";
         });
     }
+
+    unmount() {
+        console.log("unmount");
+    }
 }
