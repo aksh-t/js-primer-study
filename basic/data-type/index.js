@@ -2,6 +2,8 @@
 
 console.log(typeof true);
 console.log(typeof 42);
+// ES2020 bigint
+console.log(typeof 9007199254740992n);
 console.log(typeof "JavaScript");
 console.log(typeof Symbol("シンボル"));
 console.log(typeof undefined);
@@ -50,6 +52,14 @@ console.log(0x30A2);
 // ## 浮動小数点数リテラル
 console.log(.123);
 console.log(2e8);
+
+// ES2020 BigInt
+console.log(Number.MAX_SAFE_INTEGER); // => 9007199254740991
+console.log(1n); // => 1n
+console.log(9007199254740992n); // => 9007199254740992n
+
+// 小数点を付けた場合はSyntax Error
+// 1.2n;
 
 // # 文字列（String）
 console.log("文字列");

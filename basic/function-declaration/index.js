@@ -64,6 +64,20 @@
 }
 
 {
+    // ES2020 null coalescing
+    function addPrefix(text, prefix) {
+        // prefixがnullまたはundefinedの時、デフォルト値を返す
+        const pre = prefix ?? "デフォルト:";
+        return pre + text;
+    }
+    
+    console.log(addPrefix("文字列")); // => "デフォルト:文字列"
+    // falsyな値でも意図通りに動作する
+    console.log(addPrefix("文字列", "")); // => "文字列"
+    console.log(addPrefix("文字列", "カスタム:")); // => "カスタム:文字列"
+}
+
+{
     function add(x, y) {
         return x + y;
     }
