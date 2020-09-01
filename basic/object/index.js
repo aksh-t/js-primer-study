@@ -212,6 +212,79 @@
     }
 }
 
+// [ES2020] Optional chaining演算子（?.）
+{
+    // Optional chainingを使わない場合の例
+    function printWidgetTitle(widget) {
+        // 例外を避けるために`widget`のプロパティの存在を順場に確認してから、値を表示している
+        if (widget.window !== undefined && widget.window.title !== undefined) {
+            console.log(`ウィジェットのタイトルは${widget.window.title}です`);
+        } else {
+            console.log("ウィジェットのタイトルは未定義です");
+        }
+    }
+    // タイトルが定義されているwidget
+    printWidgetTitle({
+        window: {
+            title: "Book Viewer"
+        }
+    });
+    // タイトルが未定義のwidget
+    printWidgetTitle({
+        // タイトルが定義されてない空のオブジェクト
+    });
+}
+
+{
+    const obj = {
+        a: {
+            b: "objのaプロパティのbプロパティ"
+        }
+    };
+    // obj.a.b は存在するので、その評価結果を返す
+    console.log(obj?.a?.b); // => "objのaプロパティのbプロパティ"
+    // 存在しないプロパティのネストも`undefined`を返す
+    // ドット記法の場合は例外が発生してしまう
+    console.log(obj?.notFound?.notFound); // => undefined
+    // undefinedやnullはnullishなので、`undefined`を返す
+    console.log(undefined?.notFound?.notFound); // => undefined
+    console.log(null?.notFound?.notFound); // => undefined
+}
+
+{
+    // 先ほどの例を Optional chaining を使って書き換え
+    function printWidgetTitle(widget) {
+        const title = widget?.window?.title ?? "未定義";
+        console.log(`ウィジェットのタイトルは${title}です`);
+    }
+    printWidgetTitle({
+        window: {
+            title: "Book Viewer"
+        }
+    }); // "ウィジェットのタイトルはBook Viewerです" と出力される
+    printWidgetTitle({
+        // タイトルが定義されてない空のオブジェクト
+    }); // "ウィジェットのタイトルは未定義です" と出力される
+}
+
+{
+    const languages = {
+        ja: {
+            hello: "こんにちは！"
+        },
+        en: {
+            hello: "Hello!"
+        }
+    };
+    const langJapanese = "ja";
+    const langKorean = "ko";
+    const messageKey = "hello";
+    // Optional chaining演算子（`?.`）とブラケット記法を組みわせた書き方
+    console.log(languages?.[langJapanese]?.[messageKey]); // => "こんにちは！"
+    // `languages`に`ko`プロパティが定義されていないため、`undefined`を返す
+    console.log(languages?.[langKorean]?.[messageKey]); // => undefined
+}
+
 {
     const obj = { key: "value" };
     console.log(obj.toString());
