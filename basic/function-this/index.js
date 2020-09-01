@@ -368,3 +368,8 @@
     console.log(obj.method());
     console.log(obj.method.call("THAT"));
 }
+
+{
+    // ES2020
+    console.log(globalThis);
+}
