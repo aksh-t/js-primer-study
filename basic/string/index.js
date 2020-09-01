@@ -228,47 +228,61 @@
 }
 
 {
+    // ES2020
     const str = "ABC あいう DE えお";
     const alphabetsPattern = /[a-zA-Z]+/g;
-    const resultWithG = str.match(alphabetsPattern);
-    console.log(resultWithG.length);
-    console.log(resultWithG[0]);
-    console.log(resultWithG[1]);
-    console.log(resultWithG.index);
-    console.log(resultWithG.input);
+    // matchAllはIteratorを返す
+    const matchesIterator = str.matchAll(alphabetsPattern);
+    for (const match of matchesIterator) {
+        // マッチした要素ごとの情報を含んでいる
+        console.log(`match: "${match[0]}", index: ${match.index}, input: "${match.input}"`);
+    }
 }
-
 {
-    const str = "ABC あいう DE えお";
-    const alphabetsPattern = /[a-zA-Z]+/;
-    const results = alphabetsPattern.exec(str);
-    console.log(results.length);
-    console.log(results[0]);
-    console.log(results.index);
-    console.log(results.input);
-}
+    // ES2020以降では、RegExp.prototype.exec を使う必要はない
+    {
+        const str = "ABC あいう DE えお";
+        const alphabetsPattern = /[a-zA-Z]+/g;
+        const resultWithG = str.match(alphabetsPattern);
+        console.log(resultWithG.length);
+        console.log(resultWithG[0]);
+        console.log(resultWithG[1]);
+        console.log(resultWithG.index);
+        console.log(resultWithG.input);
+    }
 
-{
-    const str = "ABC あいう DE えお";
-    const alphabetsPattern = /[a-zA-Z]+/g;
-    console.log(alphabetsPattern.lastIndex);
-    const result1 = alphabetsPattern.exec(str);
-    console.log(result1[0]);
-    console.log(alphabetsPattern.lastIndex);
-    const result2 = alphabetsPattern.exec(str);
-    console.log(result2[0]);
-    console.log(alphabetsPattern.lastIndex);
-    const result3 = alphabetsPattern.exec(str);
-    console.log(result3);
-    console.log(alphabetsPattern.lastIndex);
-}
+    {
+        const str = "ABC あいう DE えお";
+        const alphabetsPattern = /[a-zA-Z]+/;
+        const results = alphabetsPattern.exec(str);
+        console.log(results.length);
+        console.log(results[0]);
+        console.log(results.index);
+        console.log(results.input);
+    }
 
-{
-    const str = "ABC あいう DE えお";
-    const alphabetsPattern = /[a-zA-Z]+/g;
-    let matches;
-    while (matches = alphabetsPattern.exec(str)) {
-        console.log(`match: ${matches[0]}, lastIndex: ${alphabetsPattern.lastIndex}`);
+    {
+        const str = "ABC あいう DE えお";
+        const alphabetsPattern = /[a-zA-Z]+/g;
+        console.log(alphabetsPattern.lastIndex);
+        const result1 = alphabetsPattern.exec(str);
+        console.log(result1[0]);
+        console.log(alphabetsPattern.lastIndex);
+        const result2 = alphabetsPattern.exec(str);
+        console.log(result2[0]);
+        console.log(alphabetsPattern.lastIndex);
+        const result3 = alphabetsPattern.exec(str);
+        console.log(result3);
+        console.log(alphabetsPattern.lastIndex);
+    }
+
+    {
+        const str = "ABC あいう DE えお";
+        const alphabetsPattern = /[a-zA-Z]+/g;
+        let matches;
+        while (matches = alphabetsPattern.exec(str)) {
+            console.log(`match: ${matches[0]}, lastIndex: ${alphabetsPattern.lastIndex}`);
+        }
     }
 }
 
@@ -277,6 +291,18 @@
     const [all, capture1] = "ECMAScript 6".match(pattern);
     console.log(all);
     console.log(capture1);
+}
+
+{
+    // "ES(数字+)"にマッチするが、欲しい文字列は数字の部分のみ
+    const pattern = /ES(\d+)/g;
+    // iteratorを返す
+    const matchesIterator = "ES2015、ES2016、ES2017".matchAll(pattern);
+    for (const match of matchesIterator) {
+        // マッチした要素ごとの情報を含んでいる
+        // 0番目はマッチした文字列全体、1番目がキャプチャの1番目である数字
+        console.log(`match: "${match[0]}", capture1: ${match[1]}, index: ${match.index}, input: "${match.input}"`);
+    }
 }
 
 {
